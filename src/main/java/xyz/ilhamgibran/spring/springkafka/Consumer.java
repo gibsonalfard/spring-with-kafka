@@ -28,4 +28,14 @@ public class Consumer {
         final String time =  df.format(Instant.ofEpochMilli(message.getTime()));
         logger.info("Receive a complex message : [{}]: {}", time, message.getContents());
     }
+
+    @StreamListener(target = Sink.INPUT, condition = "headers['type']=='user'")
+    public void handleUser(@Payload User usr){
+        final DateTimeFormatter df = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)
+                .withZone(ZoneId.systemDefault());
+        logger.info("Receive a complex message: ");
+        logger.info("NIM: " + usr.getNim());
+        logger.info("Nama: " + usr.getName());
+        logger.info("SKS Selesai: " + usr.getSksTake());
+    }
 }

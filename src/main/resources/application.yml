@@ -4,16 +4,23 @@ spring:
       default-binder: kafka
       kafka:
         binder:
+          # Change this configuration with your Apache Kafka location
           brokers:
             - localhost:9092
       bindings:
+        # Write consumer/subscriber configuration on input section
         input:
           binder: kafka
+          # Change this configuration to meet your Kafka topic name
           destination: test
-          content-type: text/plain
+          # content-type supported for POJO is application/json
+          content-type: application/json
           group: input-group-1
+        # Write producer/publisher configuration on output section
         output:
           binder: kafka
+          # Change this configuration to meet your Kafka topic name
           destination: test
           group: output-group-1
-          content-type: text/plain
+          # content-type supported for POJO is application/json
+          content-type: application/json

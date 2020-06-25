@@ -27,12 +27,25 @@ public class Controller {
     }
 
     @RequestMapping(value = "/sendMessage/string", method = RequestMethod.POST)
-    public String publicMessageSimple(@RequestBody String payload){
+    public String publishMessageSimple(@RequestBody String payload){
         producer.getSource()
                 .output()
                 .send(MessageBuilder.withPayload(payload)
                         .setHeader("type","string")
                         .build());
         return "success";
+    }
+
+    @RequestMapping(value = "/sendMessage/example", method = RequestMethod.GET)
+    public String publishDummyMessage(){
+        User usr = new User("171524012", "Ilham Gibran Achmad Mudzakir", 102);
+
+        producer.getSource()
+                .output()
+                .send(MessageBuilder.withPayload(usr)
+                        .setHeader("type","user")
+                        .build());
+
+        return "success ??";
     }
 }

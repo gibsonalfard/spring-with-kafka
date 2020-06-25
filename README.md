@@ -1,8 +1,14 @@
 # spring-with-kafka
 Simple Kafka Implementation using Spring Cloud Stream on Spring Boot Application
 
-Original Tutorial From https://dzone.com/articles/kafka-with-spring-cloud-stream
-How to Install Apache Kafka, Follow Instruction on this link https://kafka.apache.org/quickstart
+<p>Original Tutorial From https://dzone.com/articles/kafka-with-spring-cloud-stream</p>
+<p>How to Install Apache Kafka, Follow Instruction on this link https://kafka.apache.org/quickstart</p>
+
+<h2>What's new</h2>
+<ul>
+  <li>Change of Message <b>Content-type</b> to <b>application/json</b> in application.yml</li>
+  <li>New <b>User class</b> for message type</li>
+</ul>
 
 <h2>How To Start This Project</h2>
 <ol type="1">
@@ -23,7 +29,12 @@ How to Install Apache Kafka, Follow Instruction on this link https://kafka.apach
 </ol>
 
 <h2>Post Action</h2>
-<p>You can send Message to Kafka using HTTP Request via cURL or Postman. <b>localhost:8080/sendMessage/string</b> to send Message type String</p>
+<p>You can send Message to Kafka using HTTP Request via cURL or Postman.</p>
+<ul>
+  <li>(POST)<b>localhost:8080/sendMessage/string</b> to send Message type String, with Body (Message)</li>
+  <li>(POST)<b>localhost:8080/sendMessage/complex</b> to send Message type Chat, with Body (Message)</li>
+  <li>(GET)<b>localhost:8080/sendMessage/example</b> to send Message type User, without body</li>
+</ul>
 
 <h2>Notes</h2>
-<p>I'm still working on PubSub using POJO or Java Object, feel free to fork or pull request this repo, if you have some improvement i don't have</p>
+<p>Now i'm working for Docker container to wrap all service in one project, feel free to fork or pull request this repo, if you have some improvement</p>
