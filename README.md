@@ -3,11 +3,14 @@ Simple Kafka Implementation using Spring Cloud Stream on Spring Boot Application
 
 <p>Original Tutorial From https://dzone.com/articles/kafka-with-spring-cloud-stream</p>
 <p>How to Install Apache Kafka, Follow Instruction on this link https://kafka.apache.org/quickstart</p>
+<p>Kafka container in this project using this image https://hub.docker.com/r/bitnami/kafka</p>
 
 <h2>What's new</h2>
 <ul>
   <li>Change of Message <b>Content-type</b> to <b>application/json</b> in application.yml</li>
   <li>New <b>User class</b> for message type</li>
+  <li><b>Dockerfile</b> to build application into Docker Image</li>
+  <li><b>docker-compose.yaml</b> file to create all services include Kafka and Zookeeper</li>
 </ul>
 
 <h2>How To Start This Project</h2>
@@ -19,13 +22,20 @@ Simple Kafka Implementation using Spring Cloud Stream on Spring Boot Application
     <li><b>spring.cloud.stream.kafka.binder.brokers</b>, this is location of your Kafka (Default is localhost:9092)</li>
     <li><b>spring.cloud.stream.bindings.input.destination</b>, this is name of topic</li>
     <li><b>spring.cloud.stream.bindings.input.group</b>, this is name of you input group</li>
+    <li><b>spring.cloud.stream.bindings.input.content-type</b>, this is datatype you want to publish</li>
     <li><b>spring.cloud.stream.bindings.output.destination</b>, this is name of topic</li>
     <li><b>spring.cloud.stream.bindings.output.group</b>, this is name of you output group</li>
-    <li><b>spring.cloud.stream.bindings.input.content-type</b>, this is datatype you want to publish</li>
     <li><b>spring.cloud.stream.bindings.output.content-type</b>, this is datatype you want to subscribe</li>
   </ol>
   <li>Build application using <b>mvn clean install</b></li>
   <li>Run application using <b>mvn spring-boot:run</b></li>
+</ol>
+
+<h2>Docker Build</h2>
+<p>You can build this project as docker container by following this steps</p>
+<ol>
+  <li>Run this command to create Docker Image, <b>docker build --tag spring-kafka:latest .</b></li>
+  <li>Run this command to create container for all services, <b>docker-compose up -d</b></li>
 </ol>
 
 <h2>Post Action</h2>
@@ -37,4 +47,5 @@ Simple Kafka Implementation using Spring Cloud Stream on Spring Boot Application
 </ul>
 
 <h2>Notes</h2>
-<p>Now i'm working for Docker container to wrap all service in one project, feel free to fork or pull request this repo, if you have some improvement</p>
+<p>Feel free to fork or pull request this repo, if you have some improvement to this code
+Thanks, GibsonAlfard</p>

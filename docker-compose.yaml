@@ -1,0 +1,41 @@
+version: '3.8'
+
+networks:
+  kafka-network:
+    name: kafka-network
+
+services:
+  zookeeper:
+    image: 'bitnami/zookeeper:latest'
+    networks:
+      - kafka-network
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+  kafka:
+    image: 'bitnami/kafka:latest'
+    ports:
+      - 9092:9092
+    networks:
+      - kafka-network
+    environment:
+      KAFKA_LISTENERS: OUTSIDE://kafka:9092,INSIDE://localhost:9093
+      KAFKA_ADVERTISED_LISTENERS: OUTSIDE://kafka:9092,INSIDE://localhost:9093
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: OUTSIDE:PLAINTEXT,INSIDE:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: OUTSIDE
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      ALLOW_PLAINTEXT_LISTENER: 'yes'
+    depends_on:
+      - zookeeper
+  
+  spring-kafka:
+    image: 'spring-kafka:latest'
+    ports:
+      - 8080:8080
+    networks:
+      - kafka-network
+    environment:
+      - KAFKA_HOST=kafka
+      - KAFKA_PORT=9092
+    depends_on:
+      - zookeeper
+      - kafka
