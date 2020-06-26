@@ -1,5 +1,7 @@
 package xyz.ilhamgibran.spring.springkafka;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.stream.annotation.EnableBinding;
@@ -19,6 +21,14 @@ public class Consumer {
     @StreamListener(target = Sink.INPUT)
     public void consume(String message){
         logger.info("Receive a String Message: "+message);
+        try {
+            User usr = new ObjectMapper().readValue(message, User.class);
+            logger.info("NIM: " + usr.getNim());
+            logger.info("Nama: " + usr.getName());
+            logger.info("SKS Selesai: " + usr.getSksTake());
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
     }
 
     @StreamListener(target = Sink.INPUT, condition = "headers['type']=='chat'")

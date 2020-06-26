@@ -5,6 +5,10 @@ public class User {
     private String name;
     private int sksTake;
 
+    public User(){
+        super();
+    }
+
     public User(String nim, String name, int sks){
         this.setNim(nim);
         this.setName(name);

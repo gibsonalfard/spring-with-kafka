@@ -4,6 +4,7 @@ spring:
       default-binder: kafka
       kafka:
         binder:
+          autoCreateTopics: true
           # Change this configuration with your Apache Kafka location
           brokers:
             - localhost:9092
