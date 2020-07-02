@@ -4,6 +4,9 @@ networks:
   kafka-network:
     name: kafka-network
 
+volumes: 
+  mongo-volume:
+
 services:
   zookeeper:
     image: 'bitnami/zookeeper:latest'
@@ -26,6 +29,17 @@ services:
       ALLOW_PLAINTEXT_LISTENER: 'yes'
     depends_on:
       - zookeeper
+  mongodb:
+    image: 'mongo'
+    ports:
+      - 27017:27017
+    networks:
+      - kafka-network
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: ontime
+    volumes: 
+        - mongo-volume:/data/db
   
   spring-kafka:
     image: 'spring-kafka:latest'
@@ -39,3 +53,18 @@ services:
     depends_on:
       - zookeeper
       - kafka
+  
+  spring-mongo:
+    image: 'spring-mongo:latest'
+    ports:
+      - 8081:8081
+    networks:
+      - kafka-network
+    environment: 
+      - MONGO_HOST=mongodb
+      - KAFKA_HOST=kafka
+      - KAFKA_PORT=9092
+    depends_on:
+      - zookeeper
+      - kafka
+      - mongodb
