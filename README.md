@@ -20,15 +20,15 @@ Simple Kafka Implementation using Spring Cloud Stream on Spring Boot Application
 <h2>Docker Build</h2>
 <p>You can build this project as docker container by following this steps</p>
 <p>
-  cd spring-kafka
+  cd spring-kafka<br>
   docker build --tag spring-kafka:latest .
 </p><hr>
 <p>
-  cd ../spring-mongo
+  cd ../spring-mongo<br>
   docker build --tag spring-mongo:latest .
 </p><hr>
 <p>
-  cd ../
+  cd ../<br>
   docker-compose up -d
 </p>
 
